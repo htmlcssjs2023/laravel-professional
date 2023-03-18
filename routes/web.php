@@ -104,6 +104,19 @@ use Illuminate\Support\Facades\Route;
 
 
 //============= using helper of View class
-Route::get('/', function(){
-     return View::make('greeting', ['do' => 'James']);
-});
+// Route::get('/', function(){
+//      return View::make('greeting', ['do' => 'James']);
+// });
+
+
+//================== Nested Development
+// Route::get('/',function(){
+//      return view('admin.hello');
+// });
+
+// =========================  Route:view('views_name','template_name');
+
+// Route::view('/','test');
+Route::view('/post','post');
+Route::view('/user','user');
+Route::view('/test','test');
