@@ -177,7 +177,34 @@ Route::get('test', function () {
     //  $getData = Post::where('title', 'Laravel 9.0')->get();
     //  $getData = Post::where('title', 'Laravel 9.0')->where('description','This is laravel 8')->get();
     //  $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
-     $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
+    //  $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
 
-    return $getData;
+    // return $getData;
+        // ============================================= Update data from table;
+    // $post = Post::find(3);
+    // $post->update([
+    //     'title' => 'Laravel 9.1.5'
+    // ]);
+    
+    // return "Updated Successfully";
+
+    // ======================================== Delete Data From the table;
+
+    // $post = Post::find(1);
+
+    // if(! $post){
+    //     return "Not Found";
+    // }
+    // else{
+    //     $post->delete();
+    //     echo "Deleted Successfully";
+    // }
+  
 });
+
+// Route::get('get', [PostController::class, 'index']);
+// Route::get('store', [PostController::class, 'store']);
+// Route::get('update', [PostController::class, 'update']);
+// Route::get('delete', [PostController::class, 'destroy']);
+
+    

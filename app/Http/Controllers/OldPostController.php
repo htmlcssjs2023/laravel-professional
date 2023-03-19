@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -13,7 +14,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return "Update me";
+       $post = Post::all();
+       return $post;
     }
 
     /**
@@ -34,7 +36,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+                Post::create([
+                'is_halim' => false,
+                'title' => 'Laravel 10',
+                'description' => 'This is laravel 10',
+                'is_publish' => false
+            ]);
+            return "Insert Successfully";
     }
 
     /**
@@ -66,9 +74,14 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+         $post = Post::find(3);
+                $post->update([
+                    'title' => 'Laravel 9.1.5'
+                ]);
+                
+                return "Updated Successfully";
     }
 
     /**
@@ -77,8 +90,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+            $post = Post::find(2);
+
+            if(!$post){
+                return "Not Found";
+            }
+            else{
+                $post->delete();
+                echo "Deleted Successfully";
+            }
     }
 }
