@@ -33,8 +33,8 @@
 
 
 
-@section('scripts')
+{{-- @section('scripts')
     <script>
-        @json({{$b}}); // convert into json 
+        @json({{$b}}); 
     </script>
-@endsection
+@endsection --}}
