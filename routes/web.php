@@ -208,3 +208,15 @@ Route::get('test', function () {
 // Route::get('delete', [PostController::class, 'destroy']);
 
     
+// Route::get('/test-01', function(){
+//     return "test-01";
+// })->name('test.1');
+
+// Route::get('/test-02', function(){
+//     return "test-02";
+// })->name('test.2');
+
+
+Route::resource('posts', PostController::class);
+
+//Kemon achen ! How are you? Islam 

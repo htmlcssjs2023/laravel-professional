@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-           $table->boolean('is_halim')->default(false)->after('id');
+           $table->boolean('is_active')->default(false)->after('id');
         });
     }
 
@@ -27,7 +27,7 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             // drop column parmanently
-            $table->dropColumn('is_halim');
+            $table->dropColumn('is_active');
         });
     }
 };
