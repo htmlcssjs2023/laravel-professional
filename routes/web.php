@@ -13,7 +13,9 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 use function GuzzleHttp\Promise\all;
 
@@ -151,7 +153,7 @@ use function GuzzleHttp\Promise\all;
 //     }
 // });
 
-Route::get('test', function () {
+// Route::get('test', function () {
     // Insert data into DB;
 
     // Post::create([
@@ -200,7 +202,7 @@ Route::get('test', function () {
     //     echo "Deleted Successfully";
     // }
   
-});
+// });
 
 // Route::get('get', [PostController::class, 'index']);
 // Route::get('store', [PostController::class, 'store']);
@@ -220,3 +222,24 @@ Route::get('test', function () {
 Route::resource('posts', PostController::class);
 
 //Kemon achen ! How are you? Islam 
+
+Route::get('/test', function(Request $request){
+    // return "This is test route ";
+
+    // Session::put('login', 'You are login'); // create session
+    // Session::flash('login', 'You are login'); // create session
+
+    // Session::forget('login'); // forget session
+    //========================== How to forget multiple Session
+    // Session::flush();// Thi is method destroy multiple session
+
+    // if(Session::has('login')){ // Check session
+    //     return "Set Session";
+    // }
+    // else{
+    //     return "Session is not set";
+    // }
+
+});
+
+
