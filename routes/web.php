@@ -219,11 +219,10 @@ use function GuzzleHttp\Promise\all;
 // })->name('test.2');
 
 
-Route::resource('posts', PostController::class);
 
 //Kemon achen ! How are you? Islam 
 
-Route::get('/test', function(Request $request){
+// Route::get('/test', function(Request $request){
     // return "This is test route ";
 
     // Session::put('login', 'You are login'); // create session
@@ -240,6 +239,14 @@ Route::get('/test', function(Request $request){
     //     return "Session is not set";
     // }
 
-});
+// });
 
+
+Route::get('/admin/test-11',function(){
+    return 'This is admin test';
+})->name('test.1');
+
+
+
+Route::resource('posts', PostController::class);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PostController extends Controller
 {
@@ -14,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // show data into table 
+        $posts = Post::all();
+        return view('posts.index',['posts' => $posts]);
     }
 
     /**
@@ -30,7 +33,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request 
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,8 +54,12 @@ class PostController extends Controller
             'is_active' => $request->is_active,
             'is_publish' => $request->is_publish
         ]);
+        // dd('Values are saved');
+        Session::flash('alert-success', 'form submitted successfully');
 
-        dd('Values are saved');
+        // return redirect()->route('posts.create'); // redirect view old version
+        return to_route('posts.create'); // Laravel 9
+
     }
 
     /**

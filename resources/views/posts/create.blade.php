@@ -11,10 +11,13 @@
   </head>
   <body>
     <div class="container">
+    
         <div class="row">
            
             <div class="col-md-6 mt-5 offset-3 ">
                 <h2 class="text-center">Create Post</h2>
+
+                {{-- Validation error  --}}
 
              @if ($errors->any())
                   <div class="alert alert-danger">
@@ -25,6 +28,17 @@
                       </ul>
                   </div>
              @endif
+
+              {{-- Alert message for usere  --}}
+             
+              @if(Session::has('alert-success'))
+                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>Saved!</strong> {{ session::get('alert-success')}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+              @endif
+
+              {{-- form  --}}
 
                 <form id="form" style="margin-top: 30px" method="POST" action="{{ route('posts.store')}}">
                   @csrf
