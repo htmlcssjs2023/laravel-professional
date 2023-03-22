@@ -16,7 +16,10 @@ class PostController extends Controller
     public function index()
     {
         // show data into table 
-        $posts = Post::all();
+        // $posts = Post::all();
+        $posts = Post::paginate(10);
+        // $posts = Post::simplePaginate(8);
+ 
         return view('posts.index',['posts' => $posts]);
     }
 
@@ -70,7 +73,14 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        
+        $post = Post::find($id); // Find Id 
+        if(! $post){ // If id is not exist then error throw 404
+            abort(404);
+        }
+
+
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
