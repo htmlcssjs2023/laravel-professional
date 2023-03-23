@@ -45,12 +45,12 @@
                   {{-- <input type="hidden" name="_token" value="{{ csrf_token()}}"> --}}
                     <div class="mb-3">
                       <label for="title" class="form-label">Title</label>
-                      <input type="text" class="form-control" name="title" placeholder="Title here" value ="{{old('title')}}">
+                      <input type="text" class="form-control" name="title" placeholder="Title here" value ="{{ old('title', $post->title) }}">
                     </div>
                     <div class="mb-3">
                       <label for="title" class="form-label">Description</label>
                       <textarea class="form-control" placeholder="Write your message here" name="description">
-                        {{old('description')}}
+                        {{ old('description', $post->description)}}
                       </textarea>
                     </div>
 
@@ -58,8 +58,8 @@
                         <label>Publish</label>
                         <select class="form-select" name="is_publish">
                             <option value="" selected disabled>Choose Option</option>
-                            <option @selected(old('is_publish') == 1) value="1">Yes</option>
-                            <option @selected(old('is_publish') == 0) value="0">No</option>
+                            <option @if($post->is_publish ==1) selected @endif value="1">Yes</option>
+                            <option @if($post->is_publish ==0) selected @endif value="0">No</option>
                           </select>
                       </div>
 
@@ -67,8 +67,8 @@
                         <label>Active</label>
                         <select class="form-select" name="is_active">
                             <option value="" selected disabled>Choose Option</option>
-                            <option @selected(old('is_active') == 1) value="1">Yes</option>
-                            <option @selected(old('is_active') == 0) value="0">No</option>
+                            <option @selected(old('is_active', $post->is_active) == 1) value="1">Yes</option>
+                            <option @selected(old('is_active', $post->is_active) == 0) value="0">No</option>
                           </select>
                       </div>
                    

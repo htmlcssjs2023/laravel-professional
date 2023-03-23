@@ -30,7 +30,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $submittedData = view('posts.create');
+        return $submittedData;
     }
 
     /**
@@ -91,7 +92,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id); // Find Id 
+        if(! $post){ // If id is not exist then error throw 404
+            abort(404);
+        }
+        return view('posts.edit', compact('post'));
     }
 
     /**
