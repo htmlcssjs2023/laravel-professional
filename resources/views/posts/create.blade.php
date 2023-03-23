@@ -6,7 +6,27 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="{{ asset('assets/parsley.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      toastr.options = {
+              "closeButton": true,
+              "newestOnTop": false,
+              "progressBar": true,
+              "positionClass": "toast-bottom-center",
+              "preventDuplicates": false,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "5000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+
+  </script>
 
   </head>
   <body>
@@ -31,12 +51,12 @@
 
               {{-- Alert message for usere  --}}
              
-              @if(Session::has('alert-success'))
+              {{-- @if(Session::has('alert-success'))
                   <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Saved!</strong> {{ session::get('alert-success')}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
-              @endif
+              @endif --}}
 
               {{-- form  --}}
 
@@ -94,5 +114,11 @@
     </script>
  {{-- parsley js  --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js" ></script>
+    <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    <script>
+         @if(Session::has('alert-success'))
+              toastr["success"]("{{ Session::get('alert-success') }}");
+          @endif
+    </script>
   </body>
 </html>

@@ -59,7 +59,7 @@ class PostController extends Controller
             'is_publish' => $request->is_publish
         ]);
         // dd('Values are saved');
-        Session::flash('alert-success', 'form submitted successfully');
+        Session::flash('alert-success', 'Post save successfully');
 
         // return redirect()->route('posts.create'); // redirect view old version
         return to_route('posts.create'); // Laravel 9
@@ -117,11 +117,22 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
+        $post = Post::find($id); // Find Id 
+        if (!$post) { // If id is not exist then error throw 404
+            abort(404);
+        }
 
-         Post::find($id)->delete();
-        // return redirect()->route('posts.show')->withSuccess(__('Post delete successfully.'));
-        return back()->with('message', 'Deleted Successfully');
+        $post->delete();
+
+        // created session here 
+        $request->session()->flash('alert-danger', 'Deleted Successfully');
+        return to_route('posts.index');
+
+
+        //  Post::find($id)->delete();
+        // // return redirect()->route('posts.show')->withSuccess(__('Post delete successfully.'));
+        // return back()->with('message', 'Deleted Successfully');
     }
 }

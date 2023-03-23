@@ -28,19 +28,41 @@
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+
+    {{-- Notification  --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/toastr.min.css') }}">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      toastr.options = {
+              "closeButton": true,
+              "newestOnTop": false,
+              "progressBar": true,
+              "positionClass": "toast-bottom-center",
+              "preventDuplicates": false,
+              "onclick": null,
+              "showDuration": "300",
+              "hideDuration": "1000",
+              "timeOut": "5000",
+              "extendedTimeOut": "1000",
+              "showEasing": "swing",
+              "hideEasing": "linear",
+              "showMethod": "fadeIn",
+              "hideMethod": "fadeOut"
+            }
+
+  </script>
     
 
   </head>
   <body>
     <div class="container">
-      @if(Session::has('message'))
-      <p>{{ Session::get('message') }}</p>
-      @endif
 
         <div class="row">
             <div class="col-md-7 offset-3 mt-5">
-                <h3>Post Table </h3>
+                <h3 class="text-center">View Post </h3>
+                <a class="btn btn-info mb-3" href="{{ route('posts.create') }}"> Create Post</a>
              @if(count($posts) > 0)
                      <table class="table table-striped table-bordered">
                     <thead>
@@ -90,5 +112,14 @@
  
 {{-- bootstrap  --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="{{ asset('assets/js/toastr.min.js') }}"></script>
+
+   
+     <script>
+      @if(Session::has('alert-danger'))
+        toastr["warning"]("{{ Session::get('alert-danger') }}");
+      @endif
+
+     </script>
   </body>
 </html>
