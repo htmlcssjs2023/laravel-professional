@@ -34,6 +34,10 @@
   </head>
   <body>
     <div class="container">
+      @if(Session::has('message'))
+      <p>{{ Session::get('message') }}</p>
+      @endif
+
         <div class="row">
             <div class="col-md-7 offset-3 mt-5">
                 <h3>Post Table </h3>
@@ -59,9 +63,11 @@
                                 <td id="outer">
                                   <a href="{{ route('posts.show',$post->id)}}" class="btn btn-primary inner"> <i class="fa fa-eye"></i> </a>
                                   <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary inner"><i class="fa fa-edit"></i></a>
-                                    <form class="inner" action="#" >
+                                    <form class="inner" action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                      
                                       @csrf
-                                      <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                      @method('delete')
+                                      <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </form>
                             
                                  </td>

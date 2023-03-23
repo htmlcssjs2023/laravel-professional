@@ -19,8 +19,8 @@ class PostController extends Controller
         // $posts = Post::all();
         $posts = Post::paginate(10);
         // $posts = Post::simplePaginate(8);
- 
-        return view('posts.index',['posts' => $posts]);
+
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -74,9 +74,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        
+
         $post = Post::find($id); // Find Id 
-        if(! $post){ // If id is not exist then error throw 404
+        if (!$post) { // If id is not exist then error throw 404
             abort(404);
         }
 
@@ -93,7 +93,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id); // Find Id 
-        if(! $post){ // If id is not exist then error throw 404
+        if (!$post) { // If id is not exist then error throw 404
             abort(404);
         }
         return view('posts.edit', compact('post'));
@@ -119,6 +119,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+         Post::find($id)->delete();
+        // return redirect()->route('posts.show')->withSuccess(__('Post delete successfully.'));
+        return back()->with('message', 'Deleted Successfully');
     }
 }
