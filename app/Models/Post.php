@@ -25,6 +25,8 @@ class Post extends Model
 
     public function user(){
         // return $this->belongsTo(Post::class, 'user_id', 'id');
+        // return $this->belongsTo(Post::class); // This is laravel convention
+
         return $this->belongsTo(Post::class); // This is laravel convention
     }
 

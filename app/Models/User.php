@@ -42,9 +42,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // public function post(){
+    //     // return $this->hasOne(Post::class,'user_id', 'id');
+
+    //     // return $this->hasOne(Post::class); //  Laravel convention
+
+    //     return $this->hasOne(Post::class);
+    // }
+
+
     public function post(){
-        // return $this->hasOne(Post::class,'user_id', 'id');
-        
-        return $this->hasOne(Post::class); //  Laravel convention
+        return $this->hasOne(Post::class)->withDefault(['key', 'Laravel Post']);
+    }
+
+    public function posts(){
+        return $this->hasMany(Post::class)->where('title', 'Ab itaque');
     }
 }

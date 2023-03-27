@@ -259,10 +259,24 @@ Route::get('get/posts', [PostController::class, 'getPost'])->name('get.posts');
 //     return $user;
 // });
 
-Route::get('/test', function () {
+Route::get('test', function () {
     // $user = User::first();
     // return $user->post;
 
-    $user = Post::first();
-    return $user->user;
+    // $user = Post::first();
+    // return $user->post;
+
+    // return $user = Post::first();
+
+    // $user = Post::first();
+    // return $user->posts;
+
+    $user = User::first();
+    // return $user->post->description;
+    if($user->post){
+        return $user->post;
+    }
+     // return null
 });
+
+
