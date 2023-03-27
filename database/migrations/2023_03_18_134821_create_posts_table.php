@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();  // this is primary key
-            // $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            // $table->integer('user_id');
             $table->string('title');
             $table->text('description');
             $table->string('is_publish')->default(false);

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
            $table->boolean('is_active')->default(false)->after('id');
+           $table->softDeletes()->after('is_publish'); // add softDelete()
         });
     }
 
@@ -28,6 +29,7 @@ return new class extends Migration
         Schema::table('posts', function (Blueprint $table) {
             // drop column parmanently
             $table->dropColumn('is_active');
+            $table->softDeletes(); // delete softDelete() column if exist then create.
         });
     }
 };

@@ -7,6 +7,7 @@
 //     return view('welcome');
 // });
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
@@ -154,54 +155,54 @@ use function GuzzleHttp\Promise\all;
 // });
 
 // Route::get('test', function () {
-    // Insert data into DB;
+// Insert data into DB;
 
-    // Post::create([
-    //     'is_halim' => false,
-    //     'title' => 'Laravel 9.0',
-    //     'description' => 'This is laravel 8',
-    //     'is_publish' => false
-    // ]);
+// Post::create([
+//     'is_halim' => false,
+//     'title' => 'Laravel 9.0',
+//     'description' => 'This is laravel 8',
+//     'is_publish' => false
+// ]);
 
-    // return "Successfully Inserted";
+// return "Successfully Inserted";
 
-    // Get Data from DB
+// Get Data from DB
 
-    // $getData = Post::all();
-    // $getData = Post::find(1); // it return index wise value
-    // $getData = Post::findOrFail(2); // it return idex wise value and show error if not find data;
+// $getData = Post::all();
+// $getData = Post::find(1); // it return index wise value
+// $getData = Post::findOrFail(2); // it return idex wise value and show error if not find data;
 
-    // $getData = Post::find(0);
-    // if(!$getData){
-    //     return "Not Found";
-    // }
-    //  $getData = Post::where('title', 'Laravel 9.0')->get();
-    //  $getData = Post::where('title', 'Laravel 9.0')->get();
-    //  $getData = Post::where('title', 'Laravel 9.0')->where('description','This is laravel 8')->get();
-    //  $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
-    //  $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
+// $getData = Post::find(0);
+// if(!$getData){
+//     return "Not Found";
+// }
+//  $getData = Post::where('title', 'Laravel 9.0')->get();
+//  $getData = Post::where('title', 'Laravel 9.0')->get();
+//  $getData = Post::where('title', 'Laravel 9.0')->where('description','This is laravel 8')->get();
+//  $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
+//  $getData = Post::where(['title' => 'Laravel 9.0', 'description' => 'This is laravel 8'])->get();
 
-    // return $getData;
-        // ============================================= Update data from table;
-    // $post = Post::find(3);
-    // $post->update([
-    //     'title' => 'Laravel 9.1.5'
-    // ]);
-    
-    // return "Updated Successfully";
+// return $getData;
+// ============================================= Update data from table;
+// $post = Post::find(3);
+// $post->update([
+//     'title' => 'Laravel 9.1.5'
+// ]);
 
-    // ======================================== Delete Data From the table;
+// return "Updated Successfully";
 
-    // $post = Post::find(1);
+// ======================================== Delete Data From the table;
 
-    // if(! $post){
-    //     return "Not Found";
-    // }
-    // else{
-    //     $post->delete();
-    //     echo "Deleted Successfully";
-    // }
-  
+// $post = Post::find(1);
+
+// if(! $post){
+//     return "Not Found";
+// }
+// else{
+//     $post->delete();
+//     echo "Deleted Successfully";
+// }
+
 // });
 
 // Route::get('get', [PostController::class, 'index']);
@@ -209,7 +210,7 @@ use function GuzzleHttp\Promise\all;
 // Route::get('update', [PostController::class, 'update']);
 // Route::get('delete', [PostController::class, 'destroy']);
 
-    
+
 // Route::get('/test-01', function(){
 //     return "test-01";
 // })->name('test.1');
@@ -223,30 +224,45 @@ use function GuzzleHttp\Promise\all;
 //Kemon achen ! How are you? Islam 
 
 // Route::get('/test', function(Request $request){
-    // return "This is test route ";
+// return "This is test route ";
 
-    // Session::put('login', 'You are login'); // create session
-    // Session::flash('login', 'You are login'); // create session
+// Session::put('login', 'You are login'); // create session
+// Session::flash('login', 'You are login'); // create session
 
-    // Session::forget('login'); // forget session
-    //========================== How to forget multiple Session
-    // Session::flush();// Thi is method destroy multiple session
+// Session::forget('login'); // forget session
+//========================== How to forget multiple Session
+// Session::flush();// Thi is method destroy multiple session
 
-    // if(Session::has('login')){ // Check session
-    //     return "Set Session";
-    // }
-    // else{
-    //     return "Session is not set";
-    // }
+// if(Session::has('login')){ // Check session
+//     return "Set Session";
+// }
+// else{
+//     return "Session is not set";
+// }
 
 // });
 
 
-Route::get('/admin/test-11',function(){
-    return 'This is admin test';
-})->name('test.1');
+// Route::get('/admin/test-11',function(){
+//     return 'This is admin test';
+// })->name('test.1');
 
 
 
 Route::resource('posts', PostController::class);
+Route::get('posts/soft-delete/{id}', [PostController::class, 'softDelete'])->name('posts.soft-delete');
 
+Route::get('get/posts', [PostController::class, 'getPost'])->name('get.posts');
+
+// Route::get('test', function(){
+//     $user = User::first();
+//     return $user;
+// });
+
+Route::get('/test', function () {
+    // $user = User::first();
+    // return $user->post;
+
+    $user = Post::first();
+    return $user->user;
+});

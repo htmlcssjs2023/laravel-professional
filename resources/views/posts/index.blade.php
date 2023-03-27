@@ -91,6 +91,10 @@
                                       @method('delete')
                                       <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                     </form>
+                                    @if ($post->trashed())
+                                      <a href="{{ route('posts.soft-delete', $post->id) }}" class="btn btn-success inner"><i class="fa fa-undo"></i></a>
+                                    
+                                    @endif
                             
                                  </td>
                              </tr>
@@ -120,6 +124,13 @@
         toastr["warning"]("{{ Session::get('alert-danger') }}");
       @endif
 
+      @if(Session::has('alert-message'))
+        toastr["info"]("{{ Session::get('alert-message') }}");
+      @endif
+
+
+     
+     
      </script>
   </body>
 </html>

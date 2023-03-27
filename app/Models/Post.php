@@ -4,14 +4,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    // use HasFactory;
+    use HasFactory, SoftDeletes;
     // manually add model 
     // protected $table = ['users'];
 
-    // protected $fillable = [ 'is_halim','title','description', 'is_publish'];
+    // protected $fillable = [
+    //      'is_halim',
+    //      'user_id',
+    //      'title',
+    //      'description',
+    //      'is_publish',
+    //      'deleted_at'
+        
+    // ];
     protected $guarded = [];
+
+    public function user(){
+        // return $this->belongsTo(Post::class, 'user_id', 'id');
+        return $this->belongsTo(Post::class); // This is laravel convention
+    }
 
 }

@@ -119,6 +119,10 @@
          @if(Session::has('alert-success'))
               toastr["success"]("{{ Session::get('alert-success') }}");
           @endif
+
+          @if(Session::has('alert-update'))
+            toastr["info"]("{{ Session::get('alert-update') }}");
+         @endif
     </script>
   </body>
 </html>
