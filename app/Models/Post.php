@@ -30,4 +30,16 @@ class Post extends Model
         return $this->belongsTo(Post::class); // This is laravel convention
     }
 
+    // Define relationship 
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable');
+    }
+
+    public function images(){
+        return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function tags(){
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }

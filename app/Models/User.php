@@ -58,4 +58,30 @@ class User extends Authenticatable
     public function posts(){
         return $this->hasMany(Post::class)->where('title', 'Ab itaque');
     }
+
+    public function postComment(){
+        return $this->hasOneThrough(Comment::class, Post::class);
+    }
+
+    public function postComments(){
+        return $this->hasManyThrough(Comment::class, Post::class);
+    }
+    // Monay to Many
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
+
+    // define relationship
+
+    public function image(){
+        return $this->morphOne(Image::class, 'imageable')->latestOfMany();
+        ;
+    }
+
+    // many to many polymorphic
+    public function images(){
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }
+
+

@@ -6,12 +6,14 @@
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+use App\Models\Image;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Models\role;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
@@ -271,12 +273,75 @@ Route::get('test', function () {
     // $user = Post::first();
     // return $user->posts;
 
-    $user = User::first();
+    // $user = User::first();
     // return $user->post->description;
-    if($user->post){
-        return $user->post;
-    }
+    // if($user->post){
+    //     return $user->post;
+    // }
      // return null
+
+
+// hasOneThrough
+    //  $user = User::first();
+    //  return $user->postComment;
+
+// hasManyThrough
+
+    // $user = User::first();
+    // return $user->postComments;
+
+
+    // $user = User::first();
+    // $role = Role::first();
+
+    // return $user->roles()->attach($role);
+    // return $user->roles()->detach($role);
+
+    // $role->users()->attach($user);
+    // $role->users()->attach($user);
+    // return "attached";
+
+
+    // sync
+    // $user = User::first();
+    // $role = Role::first();
+    // $user->roles()->attach([1,2]);
+    // return 'attached';
+
+    // $user->roles()->detach([1]);
+        // $user->roles()->sync($role);
+
+    // return 'detached';
+
+    // $user = User::first();
+    // $post = Post::first();
+    
+    // return $user->image;
+    // return $post->image;
+
+
+
+    //========================== One to Many Relationship with polymorphic
+
+    // $image = Image::first();
+    // return $image->imageable;
+
+
+    // $image = Image::find(2);
+    // return $image->imageable;
+
+    // $user = User::first();
+    // return $user->image;
+
+    // $user = User::first();
+    // return $user->images;
+   
+    // $post = Post::first();
+    // return $post->images;
+
+    $post = Post::first();
+   return $post->tags;
+
 });
 
 
