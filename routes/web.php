@@ -339,8 +339,11 @@ Route::get('test', function () {
     // $post = Post::first();
     // return $post->images;
 
-    $post = Post::first();
-   return $post->tags;
+//     $post = Post::first();
+//    return $post->tags;
+
+
+   $post = Post::all();
 
 });
 
