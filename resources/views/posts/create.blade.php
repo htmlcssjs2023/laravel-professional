@@ -60,7 +60,7 @@
 
               {{-- form  --}}
 
-                <form id="form" style="margin-top: 30px" method="POST" action="{{ route('posts.store')}}">
+                <form id="form" style="margin-top: 30px" enctype="multipart/form-data" method="POST" action="{{ route('posts.store')}}">
                   @csrf
                   {{-- <input type="hidden" name="_token" value="{{ csrf_token()}}"> --}}
                     <div class="mb-3">
@@ -91,7 +91,11 @@
                             <option @selected(old('is_active') == 0) value="0">No</option>
                           </select>
                       </div>
-                   
+
+                      <div class="mb-3">
+                        <label for="file">File Upload</label>
+                        <input type="file" class="form-control-file form-control" id="file" name="file">
+                      </div>
                     
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>

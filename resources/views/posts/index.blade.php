@@ -67,6 +67,7 @@
                      <table class="table table-striped table-bordered">
                     <thead>
                       <tr>
+                        <th scope="col">Image</th>
                         <th scope="col">Title</th>
                         <th scope="col">Description</th>
                         <th scope="col">Publish</th>
@@ -78,12 +79,15 @@
                     <tbody>
                       @foreach ( $posts as $post )
                             <tr>
+                              {{-- @dd($post->image); --}}
+
+                                <td><img src="{{ $post->image->name }}" alt="" style="width:50px; height:auto"></td>
                                 <td>{{$post->title}}</td>
                                 <td>{{Str::limit($post->description, '10', '...')}}</td>
                                 <td>{{$post->is_publish == 1 ? 'Yes' : 'No'}}</td>
                                 <td>{{$post->is_active == 1 ? 'Yes' : 'No'}}</td>
                                 <td id="outer">
-                                  <a href="{{ route('posts.show',$post->id)}}" class="btn btn-primary inner"> <i class="fa fa-eye"></i> </a>
+                                  <a href="{{ route('posts.show',$post->slug)}}" class="btn btn-primary inner"> <i class="fa fa-eye"></i> </a>
                                   <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-secondary inner"><i class="fa fa-edit"></i></a>
                                     <form class="inner" action="{{ route('posts.destroy', $post->id) }}" method="POST">
                                       

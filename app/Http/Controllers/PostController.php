@@ -1,14 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use App\Http\Requests\Post\CreateRequest;
 use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Requests\PostRequest;
+use App\Models\Gallery;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\fileExists;
 
 class PostController extends Controller
 {
@@ -52,13 +57,46 @@ class PostController extends Controller
         // Post::create($request->all());
 
         // SAVE DATA 
-        Post::create([
-            'title' => $request->title,
-            'user_id' => 1,
-            'description' => $request->description,
-            'is_active' => $request->is_active,
-            'is_publish' => $request->is_publish
-        ]);
+
+        // check image is load or not
+        $file = $request->file;
+        if($file){
+            $fileName = time(). '-'.$file->getClientOriginalName();
+            // file path
+            // $filePath = public_path().'/assets/images';
+           // file move
+        //    $file->move($filePath, $fileName);
+        $filePath = '/';
+          $file = Storage::disk('post')->put($filePath, $file);
+          $fileName =basename($file);
+            // dd($fileName);
+          $gallery = Gallery::create([
+                'name' => $fileName,
+                'type' => Gallery::Type
+           ]);
+
+    // make a dynamic user_id
+    $slug = Str::slug($request->title, '-');
+    // dd($slug);
+
+        $user = User::first();
+        if($user){
+            Post::create([
+                'gallery_id' => $gallery->id,
+                'title' => $request->title,
+                'slug' => $slug,
+                'user_id' => $user->id,
+                'description' => $request->description,
+                'is_active' => $request->is_active,
+                'is_publish' => $request->is_publish,
+               
+            ]);
+        }
+      
+        }
+    
+      
+
         // dd('Values are saved');
         Session::flash('alert-success', 'Post save successfully');
 
@@ -73,13 +111,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
 
-        $post = Post::find($id); // Find Id 
-        if (!$post) { // If id is not exist then error throw 404
-            abort(404);
-        }
+        // $post = Post::find($id); // Find Id 
+        // if (!$post) { // If id is not exist then error throw 404
+        //     abort(404);
+        // }
 
 
         return view('posts.show', ['post' => $post]);
@@ -139,6 +177,14 @@ class PostController extends Controller
         if (!$post) { // If id is not exist then error throw 404
             abort(404);
         }
+
+        $file = public_path(). $post->image->name;
+        if(fileExists($file)){
+            unlink($file);
+        }
+
+       
+           
 
         $post->delete();
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             // $table->integer('user_id');
             $table->string('title');
+            $table->string('slug');
             $table->text('description');
             $table->string('is_publish')->default(false);
             $table->timestamps();  // execute two column 1. created_at 2. updated_at 

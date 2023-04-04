@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Suppor\Facades\destory;
+use Illuminate\Suppor\Facades\patch;
+
 
 use function GuzzleHttp\Promise\all;
 
@@ -251,10 +254,30 @@ use function GuzzleHttp\Promise\all;
 
 
 
-Route::resource('posts', PostController::class);
-Route::get('posts/soft-delete/{id}', [PostController::class, 'softDelete'])->name('posts.soft-delete');
+// Route::resource('posts', PostController::class);
 
-Route::get('get/posts', [PostController::class, 'getPost'])->name('get.posts');
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::get('posts/{post:slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::patch('posts/update/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('posts/delete/{id}', [PostController::class, 'destory'])->name('posts.destroy');
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('posts/soft-delete/{id}', [PostController::class, 'softDelete'])->name('posts.soft-delete');
+
+// Route::get('get/posts', [PostController::class, 'getPost'])->name('get.posts');
 
 // Route::get('test', function(){
 //     $user = User::first();
